@@ -3,17 +3,21 @@ import random
 
 app = Flask(__name__)
 
-# List of random messages
-messages = [
-    "You are amazing!",
-    "Believe in yourself!",
-    "Kindness is your superpower!",
-    "Keep shining bright!",
-    "You are loved and appreciated!"
-]
+# Load messages from a file
+def load_messages():
+    try:
+        with open('messages.txt', 'r', encoding='utf-8') as file:
+            # Read all lines, stripping whitespace and excluding empty lines
+            messages = [line.strip() for line in file if line.strip()]
+        return messages
+    except FileNotFoundError:
+        return ["Oops! No messages found. Please add a 'messages.txt' file."]
 
 @app.route('/')
 def home():
+    # Load the messages from the file
+    messages = load_messages()
+    
     # Select a random message
     message = random.choice(messages)
     
@@ -59,7 +63,7 @@ def home():
                 margin-bottom: 2rem;
             }}
 
-            /* Styling for the link */
+            /* Styling for the refresh link */
             .link {{
                 font-size: 1.2rem;
                 color: #ffb6c1;
@@ -72,34 +76,17 @@ def home():
 
             .link:hover {{
                 background-color: rgba(255, 255, 255, 0.3);
-                text-decoration: underline;
-            }}
-
-            /* Footer Message */
-            .footer {{
-                margin-top: 2rem;
-                font-size: 0.9rem;
-                color: #ccc;
+                text-decoration: none;
             }}
         </style>
     </head>
     <body>
-        <div class="message">
-            {message}
-        </div>
-        <div>
-            To know more, check out my Instagram: 
-            <a href="https://www.instagram.com/light_beyond_shadows?igsh=MWx1NjNrdGQ1bDY1ZQ%3D%3D&utm_source=qr" target="_blank" class="link">
-                light_beyond_shadows
-            </a>
-        </div>
-        <div class="footer">
-            Made with 💖 to spread kindness.
-        </div>
+        <div class="message">{message}</div>
+        <a href="/" class="link">Get Another Message</a>
     </body>
     </html>
     """
-    return render_template_string(html_content)
+    return html_content
 
 if __name__ == '__main__':
     app.run(debug=True)
