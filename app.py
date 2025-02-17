@@ -49,20 +49,17 @@ def home():
                 box-sizing: border-box;
                 font-family: 'Arial', sans-serif;
                 height: 100%;
-                overflow: hidden;
-            }}
-
-            /* Background styling */
-            body {{
-                background-image: url('{background_image}');
-                background-size: cover;
-                background-position: center;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 color: #ffffff;
                 text-align: center;
+                background-color: #1a1a1a; /* Fallback color */
+                background-image: url('{background_image}');
+                background-size: cover;
+                background-position: center;
+                overflow: hidden;
             }}
 
             /* Styling for the random message */
