@@ -13,6 +13,15 @@ def load_messages():
     except FileNotFoundError:
         return ["Oops! No messages found. Please add a 'messages.txt' file."]
 
+# List of dynamic background images
+background_images = [
+    "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    "https://images.unsplash.com/photo-1533612608997-212b06408fdf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    "https://images.unsplash.com/photo-1495954380655-01609180fc2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    "https://images.unsplash.com/photo-1542140461-1c5f00b289f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    "https://images.unsplash.com/photo-1517832606290-98c3f00664a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
+]
+
 @app.route('/')
 def home():
     # Load the messages from the file
@@ -20,6 +29,9 @@ def home():
     
     # Select a random message
     message = random.choice(messages)
+    
+    # Select a random background image
+    background_image = random.choice(background_images)
     
     # HTML content for the webpage
     html_content = f"""
@@ -42,7 +54,7 @@ def home():
 
             /* Background styling */
             body {{
-                background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080');
+                background-image: url('{background_image}');
                 background-size: cover;
                 background-position: center;
                 display: flex;
@@ -63,7 +75,7 @@ def home():
                 margin-bottom: 2rem;
             }}
 
-            /* Styling for the refresh link */
+            /* Styling for the Instagram link and refresh link */
             .link {{
                 font-size: 1.2rem;
                 color: #ffb6c1;
@@ -72,17 +84,38 @@ def home():
                 padding: 0.5rem 1rem;
                 border-radius: 8px;
                 transition: all 0.3s ease;
+                margin-top: 1rem;
             }}
 
             .link:hover {{
                 background-color: rgba(255, 255, 255, 0.3);
                 text-decoration: none;
             }}
+
+            .insta-link {{
+                color: #FFD700; /* Gold color */
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 1.5rem;
+                margin-top: 1.5rem;
+                padding: 0.5rem 1rem;
+                background-color: rgba(0, 0, 0, 0.5);
+                border-radius: 10px;
+                transition: transform 0.3s ease, background-color 0.3s ease;
+            }}
+
+            .insta-link:hover {{
+                background-color: rgba(255, 223, 0, 0.8);
+                transform: scale(1.05);
+            }}
         </style>
     </head>
     <body>
         <div class="message">{message}</div>
         <a href="/" class="link">Get Another Message</a>
+        <a href="https://www.instagram.com/light_beyond_shadows?igsh=MWx1NjNrdGQ1bDY1ZQ%3D%3D&utm_source=qr" class="insta-link" target="_blank">
+            Check out my Instagram: light_beyond_shadows
+        </a>
     </body>
     </html>
     """
