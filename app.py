@@ -74,4 +74,40 @@ def home():
             /* Styling for the random message */
             .message {{
                 position: absolute;
-                top
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 2.5rem;
+                font-weight: bold;
+                background-color: rgba(0, 0, 0, 0.5); /* Adds contrast */
+                padding: 1rem 2rem;
+                border-radius: 12px;
+                text-align: center;
+            }}
+        </style>
+    </head>
+    <body>
+        <!-- Side Top Menu Bar -->
+        <div class="menu">
+            <a href="#">About</a>
+            <a href="#">Prints</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <!-- Message Display -->
+        <div class="message">{message}</div>
+
+        <!-- Hidden Instagram Link -->
+        <!-- 
+        <a href="https://www.instagram.com/light_beyond_shadows?igsh=MWx1NjNrdGQ1bDY1ZQ%3D%3D&utm_source=qr" 
+           class="insta-link" target="_blank">
+            Check out my Instagram: light_beyond_shadows
+        </a>
+        -->
+    </body>
+    </html>
+    """
+    return render_template_string(html_content)
+
+if __name__ == '__main__':
+    app.run(debug=True)
