@@ -22,7 +22,7 @@ def home():
     # Static background image URL
     background_image = "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
     
-    # HTML template with the menu bar and styled content
+    # HTML template with responsive design for mobile
     html_content = f"""
     <!DOCTYPE html>
     <html lang="en">
@@ -43,23 +43,27 @@ def home():
                 background-image: url('{background_image}');
                 background-size: cover;
                 background-position: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
                 overflow: hidden;
             }}
 
-            /* Side Top Menu Bar */
+            /* Responsive Side Top Menu Bar */
             .menu {{
-                position: absolute;
-                top: 20px;
-                left: 20px;
+                position: fixed;
+                top: 10px;
+                left: 10px;
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 gap: 10px;
+                z-index: 1000;
             }}
 
             .menu a {{
                 color: #ffffff;
                 text-decoration: none;
-                font-size: 1.2rem;
+                font-size: 1rem;
                 font-weight: bold;
                 padding: 0.5rem 1rem;
                 background-color: rgba(0, 0, 0, 0.6);
@@ -73,21 +77,33 @@ def home():
 
             /* Styling for the random message */
             .message {{
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font-size: 2.5rem;
+                margin: auto;
+                font-size: 2rem;
                 font-weight: bold;
-                background-color: rgba(0, 0, 0, 0.5); /* Adds contrast */
+                background-color: rgba(0, 0, 0, 0.6); /* Adds contrast */
                 padding: 1rem 2rem;
                 border-radius: 12px;
                 text-align: center;
+                max-width: 90%;
+                word-wrap: break-word;
+            }}
+
+            /* Mobile Adjustments */
+            @media (max-width: 768px) {{
+                .message {{
+                    font-size: 1.5rem;
+                    padding: 1rem;
+                }}
+
+                .menu a {{
+                    font-size: 0.9rem;
+                    padding: 0.4rem 0.8rem;
+                }}
             }}
         </style>
     </head>
     <body>
-        <!-- Side Top Menu Bar -->
+        <!-- Menu Bar -->
         <div class="menu">
             <a href="#">About</a>
             <a href="#">Prints</a>
@@ -97,17 +113,6 @@ def home():
         <!-- Message Display -->
         <div class="message">{message}</div>
 
-        <!-- Hidden Instagram Link -->
-        <!-- 
-        <a href="https://www.instagram.com/light_beyond_shadows?igsh=MWx1NjNrdGQ1bDY1ZQ%3D%3D&utm_source=qr" 
-           class="insta-link" target="_blank">
-            Check out my Instagram: light_beyond_shadows
-        </a>
-        -->
-    </body>
-    </html>
-    """
-    return render_template_string(html_content)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+        <!-- Instagram Link -->
+        <footer style="text-align: center; margin-bottom: 20px;">
+            <a href="https://www.instagram.com/light_beyon
