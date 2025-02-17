@@ -23,7 +23,7 @@ def home():
     background_image = "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
     
     # HTML template with responsive design for mobile
-    html_content = f"""
+    html_content = """
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -115,4 +115,15 @@ def home():
 
         <!-- Instagram Link -->
         <footer style="text-align: center; margin-bottom: 20px;">
-            <a href="https://www.instagram.com/light_beyon
+            <a href="https://www.instagram.com/light_beyond_shadows?igsh=MWx1NjNrdGQ1bDY1ZQ%3D%3D&utm_source=qr" 
+               style="color: #ffb6c1; text-decoration: none; font-size: 1rem; font-weight: bold;">
+                Follow on Instagram: light_beyond_shadows
+            </a>
+        </footer>
+    </body>
+    </html>
+    """.format(background_image=background_image, message=message)
+    return render_template_string(html_content)
+
+if __name__ == '__main__':
+    app.run(debug=True)
